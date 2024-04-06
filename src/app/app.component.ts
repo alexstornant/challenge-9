@@ -1,10 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'challenge-9';
+export class AppComponent implements OnInit {
+  data: any;
+  imageUrl: string = '';
+
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  ngOnInit() {
+    this.http.get('https://picsum.photos/id/0/info')
+    .subscribe( response => {
+      this.data = response
+      console.log(this.data);
+    }
+    );
+  }
 }
